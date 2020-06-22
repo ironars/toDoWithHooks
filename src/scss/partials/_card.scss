@@ -1,0 +1,19 @@
+.t-card {
+  box-shadow: 4px 3px 13px 0px rgba(0, 0, 0, 0.13);
+  background-color: $color-white;
+  max-width: 480px;
+  width: 100%;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  word-wrap: break-word;
+  background-clip: border-box;
+  border: 1px solid #ffffff;
+  border-radius: 0.25rem;
+  .card-body {
+    padding: 10px 30px;
+    max-height: 400px;
+    overflow: auto;
+  }
+}
