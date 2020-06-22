@@ -23,4 +23,4 @@ yarn-debug.log*
 yarn-error.log*
 
 /src/scss/.sass-cache
-./src/settings.json
+/src/settings.json
