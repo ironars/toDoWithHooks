@@ -1,12 +1,8 @@
 import React from 'react'
-import { useDispatch } from 'react-redux'
-import { completeToDo } from '../actions'
 
-function ToDoItem({ todoId, todo }) {
-  const dispatch = useDispatch()
-
-  const handleComplete = (todoItem) => {
-    dispatch(completeToDo(todoItem, !todo.isCompleted))
+function ToDoItem({ todoId, todo, toggleComplete }) {
+  const handleComplete = (todoId) => {
+    toggleComplete(todoId, !todo.isCompleted)
   }
 
   return (

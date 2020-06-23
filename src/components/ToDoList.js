@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import { fetchToDos, addToDo } from '../actions'
+import { fetchToDos, addToDo, completeToDo } from '../actions'
 import ToDoItem from './ToDoItem'
 import { toDoFilter } from '../utils/contants'
 import listIcon from '../assets/icon/list_bulleted.svg'
@@ -10,7 +10,7 @@ function ToDoList() {
   const [showForm, setShowForm] = useState(false)
   const [toDoValue, setToDoValue] = useState('')
   const [displayFilter, setDisplayFilter] = useState('all')
-  const data = useSelector((state) => state.data)
+  const data = useSelector((state) => state.data.data || [])
   const dispatch = useDispatch()
 
   useEffect(() => {
@@ -27,6 +27,10 @@ function ToDoList() {
     setToDoValue('')
   }
 
+  const toggleComplete = (todoId, status) => {
+    dispatch(completeToDo(todoId, status))
+  }
+
   const renderForm = () => {
     if (showForm) {
       return (
@@ -41,22 +45,21 @@ function ToDoList() {
   }
 
   const renderToDoList = () => {
+    if (data.length <= 0) return
     let toDos = []
     if (displayFilter === toDoFilter.COMPLETED) {
-      Object.keys(data).forEach((key) => {
-        if (data[key].isCompleted) {
-          toDos.push(<ToDoItem key={key} todoId={key} todo={data[key]} />)
-        }
-      })
-    } else {
-      toDos =
-        data &&
-        Object.keys(data).map((key) => {
-          return <ToDoItem key={key} todoId={key} todo={data[key]} />
+      toDos = data
+        .filter((todo) => todo.isCompleted)
+        .map((toDoItem) => {
+          return <ToDoItem key={toDoItem.id} todoId={toDoItem.id} todo={toDoItem} toggleComplete={toggleComplete} />
         })
+    } else {
+      toDos = data.map((toDoItem) => {
+        return <ToDoItem key={toDoItem.id} todoId={toDoItem.id} todo={toDoItem} toggleComplete={toggleComplete} />
+      })
     }
 
-    return <React.Fragment>{toDos && toDos.length > 0 ? toDos : null}</React.Fragment>
+    return toDos
   }
 
   return (
