@@ -1,0 +1,22 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ToDoItem should render and match snapshot 1`] = `
+<div>
+  <li
+    class="t-item"
+  >
+    <input
+      data-testid="todoCheck"
+      name="Meeting"
+      type="checkbox"
+      value="false"
+    />
+    <label
+      class=""
+      for="Meeting"
+    >
+      Meeting
+    </label>
+  </li>
+</div>
+`;
