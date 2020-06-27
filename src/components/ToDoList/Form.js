@@ -19,7 +19,9 @@ function Form({ handleSubmit, showForm }) {
         type="text"
         placeholder="Added New Item"
       />
-      <button type="submit">add</button>
+      <button disabled={!toDoValue} type="submit">
+        add
+      </button>
     </form>
   )
 }
